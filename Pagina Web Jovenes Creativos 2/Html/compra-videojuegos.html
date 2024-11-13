@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Diamantes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0f1115;
+            color: white;
+            padding: 20px;
+        }
+
+        .product-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .product-image {
+            background-color: rgba(30, 30, 30, 0.85);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            height: 600px;
+            align-items: center;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            
+        }
+
+        .product-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .rating{
+            display: flex;
+            flex-direction: row-reverse; 
+            justify-content: flex-end;
+            width: fit-content;
+            text-align: start;
+        }
+
+        .rating:not(:checked) > input {
+        position: absolute;
+        appearance: none;
+        }
+
+        .rating:not(:checked) > label {
+        float: right;
+        cursor: pointer;
+        font-size: 30px;
+        color: #666;
+        }
+
+        .rating:not(:checked) > label:before {
+        content: "★";
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label,
+        .rating > label:hover ~ input:checked ~ label {
+        color: #e58e09;
+        }
+
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+        color: #ff9e0b;
+        }
+
+        .rating > input:checked ~ label {
+        color: #ffa723;
+        }
+
+
+        .product-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price-range {
+            font-size: 24px;
+            color: #00ff66;
+            margin-bottom: 20px;
+        }
+
+        .diamonds-section h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .diamonds-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .diamond-option {
+            background-color: #ffffff;
+            color: #000;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .diamond-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 102, 0.2);
+        }
+
+        .diamond-option.selected {
+            background-color: #00ff66;
+            color: #000000;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: #333;
+        }
+
+        .quantity-input {
+            background: none;
+            border: none;
+            color: white;
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-cart {
+            background-color: #00ff66;
+            color: #000;
+        }
+
+        .btn-cart:hover {
+            background-color: #00cc52;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1da851;
+        }
+
+        .additional-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .wishlist-btn {
+            background: none;
+            border: none;
+            color: #00ff66;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .wishlist-btn:hover{
+            color: #00cc52;
+        }
+
+        .clear-btn {
+            color: #00ff66;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            color: #00cc52;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .diamonds-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="/Imagenes/FREE FIRE.jpeg" alt="Free Fire Diamantes">
+        </div>
+        
+        <div class="product-details">
+            <div class="rating">
+                <input checked="" type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text"></label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text"></label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text"></label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text"></label>
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text"></label>
+            </div>
+
+            <h1 class="product-title">FREE FIRE | DIAMANTES</h1>
+            <div class="price-range">$1,25 - $52,00</div>
+
+            <div class="diamonds-section">
+                <h3>Diamantes</h3>
+                <div class="diamonds-grid">
+                    <div class="diamond-option" data-price="1.25">100+Bonus</div>
+                    <div class="diamond-option" data-price="3.30">310+Bonus</div>
+                    <div class="diamond-option" data-price="5.25">520+Bonus</div>
+                    <div class="diamond-option" data-price="10.00">1050+Bonus</div>
+                    <div class="diamond-option" data-price="19.00">2180+Bonus</div>
+                    <div class="diamond-option" data-price="46.00">5600+Bonus</div>
+                    <div class="diamond-option" data-price="2.15">Tarjeta Semanal</div>
+                    <div class="diamond-option" data-price="10.50">Tarjeta Mensual</div>
+                    <div class="diamond-option" data-price="3.80">Pase de Nivel</div>
+                </div>
+
+                <button class="clear-btn">Clear</button>
+
+                <div class="quantity-section">
+                    <span id="total-price">$1,25</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decrease">-</button>
+                        <input type="text" class="quantity-input" id="quantity" value="1" readonly>
+                        <button class="quantity-btn" id="increase">+</button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-cart" id="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        AÑADIR AL CARRITO
+                    </button>
+                    <button class="btn btn-whatsapp" id="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        CONSULTAR POR WHATSAPP
+                    </button>
+                </div>
+
+                <div class="additional-actions">
+                    <button class="wishlist-btn">
+                        <i class="far fa-heart"></i>
+                        Añadir a la lista de deseos
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPackage = null;
+        let quantity = 1;
+        const diamondOptions = document.querySelectorAll('.diamond-option');
+        const quantityInput = document.getElementById('quantity');
+        const decreaseBtn = document.getElementById('decrease');
+        const increaseBtn = document.getElementById('increase');
+        const addToCartBtn = document.getElementById('add-to-cart');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const totalPriceDisplay = document.getElementById('total-price');
+        const clearBtn = document.querySelector('.clear-btn');
+
+        function updatePrice() {
+            if (selectedPackage) {
+                const totalPrice = (selectedPackage.price * quantity).toFixed(2);
+                totalPriceDisplay.textContent = `$${totalPrice}`;
+            }
+        }
+
+        diamondOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                diamondOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedPackage = {
+                    name: option.textContent,
+                    price: parseFloat(option.dataset.price)
+                };
+                updatePrice();
+            });
+        });
+
+        decreaseBtn.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.value = quantity;
+                updatePrice();
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            quantity++;
+            quantityInput.value = quantity;
+            updatePrice();
+        });
+
+        addToCartBtn.addEventListener('click', () => {
+            if (selectedPackage) {
+                alert(`Añadido al carrito: ${quantity} ${selectedPackage.name}`);
+            } else {
+                alert('Por favor, selecciona un paquete primero');
+            }
+        });
+
+        whatsappBtn.addEventListener('click', () => {
+            if (selectedPackage) {
+                const message = `Hola, me interesa comprar ${quantity} ${selectedPackage.name} por $${(selectedPackage.price * quantity).toFixed(2)}`;
+                window.open(`https://wa.me/573136272407?text=${encodeURIComponent(message)}`, '_blank');
+            } else {
+                alert('Por favor, selecciona un paquete primero');
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            selectedPackage = null;
+            quantity = 1;
+            quantityInput.value = quantity;
+            diamondOptions.forEach(opt => opt.classList.remove('selected'));
+            totalPriceDisplay.textContent = '$1,25';
+        });
+    </script>
+</body>
+</html>
